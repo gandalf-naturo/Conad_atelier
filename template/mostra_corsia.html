@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Mostra Corsia</title>
+</head>
+<body>
+    <h1>Mostra contenuto corsie:</h1>
+    {% if errore %}
+        <p style="color:red;">{{errore}}</p>
+    {% endif %}
+    <form action="/mostra_corsia" method="post">
+        <label for="corsia">Inserisci il numero della corsia che vuoi visualizzare:</label>
+        <input type="text" id="corsia" name="corsia" required>
+        <input type="submit" value="Ricerca corsia">
+    </form>
+    <br><br>
+    <p>Per tornare al menu clicca qui -> <a href="/">Menu</a></p>
+    {% if corsia %}
+        <h2>Contenuto corsia</h2>
+        <ul>
+        {% for prodotto in corsia %}
+            <li>
+                <h3>{{ prodotto[1] }}</h3>
+                <p>N.corsia: {{ prodotto[2] }}</p>
+                <p>Descrizione: {{ prodotto[3] }}</p>
+                <img src="{{ prodotto[4] }}" alt="image">
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>
