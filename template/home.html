@@ -16,13 +16,13 @@
             {% endif %}
             <p>Salve, {{ username}}!</p>
             <h2>Inserimento e eliminazione prodotti:</h2>
-            <p>Per inserire prodotti: <a href="/inserisci_prodotti" class="button">Inserisci Prodotti</a></p>
-            <p>Per eliminare prodotti: <a href="/elimina" class="button">Elimina Prodotti</a></p>
+            <p><a href="/inserisci_prodotti" class="button">Inserisci Prodotti</a></p>
+            <p><a href="/elimina" class="button">Elimina Prodotti</a></p>
             <h3>Visualizzazione prodotti e corsie:</h3>
-            <p>Per cercare prodotti: <a href="/mostra_prodotti" class="button">Mostra Prodotti</a></p>
-            <p>Per visualizzare il contenuto delle singole corsie: <a href="/mostra_corsia" class="button">Mostra Corsia</a></p>
-            <br> <br>
-            <p>Per effettuare il logout: <a href="/logout" class="button">Logout</a></p>
+            <p><a href="/mostra_prodotti" class="button">Mostra Prodotti</a></p>
+            <p><a href="/mostra_corsia" class="button">Mostra Corsia</a></p>
+            <br><br>
+            <p><a href="/logout" class="button">Logout</a></p>
         {% else %}
             <p>Prima di poter inserire i prodotti occorre essere loggato!</p>
             <p>Non sei loggato, <a href="/login" class="button">login</a> per accedere alla home page</p>

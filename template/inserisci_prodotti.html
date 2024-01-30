@@ -14,12 +14,14 @@
     <form action="/inserisci_prodotti" method="post" enctype="multipart/form-data">
         <label for="nome">Inserisci il nome del prodotto: </label>
         <input type="text" id="nome" name="nome" required><br><br>
-        <label for="image">Seleziona un'immagine:</label>
+        <label for="image">Seleziona un'immagine del prodotto:</label>
         <input type="file" name="image" accept="image/*" required><br><br>
+        <label for="image_scaffale">Seleziona un'immagine dello scaffale</label>
+        <input type="file" name="image_scaffale"accept="image/*" required><br><br>> 
         <label for="corsia">Inserisci il numero della corsia: </label>
         <input type="text" id="corsia" name="corsia"required><br><br>
         <label for="descrizione">Inserisci la descrizione del prodotto:</label>
-        <input type="text" id="descrizione" name="descrizione"required><br><br>
+        <input type="text" id="descrizione" name="descrizione"><br><br>
         <input type="submit" value="Aggiungi prodotto">
     </form>
     <br><br>

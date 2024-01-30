@@ -8,29 +8,32 @@
 </head>
 <body>
    
-    <h1>Scelta prodotti da mostrare: </h1>
+    <h1>Scelta prodotti da Cercare: </h1>
     {% if errore %}
         <p style="color:red;">{{errore}}</p>
     {% endif %}
     <form action="/mostra_prodotti"method="post">
         <label for="nome">Inserisci il nome del prodotto da ricercare: </label>
         <input type="text" id="nome" name="nome" required><br><br>
-        <label for="corsia">Inserisci il numero della corsia del prodotto: </label>
-        <input type="text" id="corsia" name="corsia"required><br><br>
         <input type="submit" value="Ricerca prodotto">
     </form>
     <br><br>
     <p>Per tornare al menu clicca qui -> <a href="/">Menu</a></p>
     {% if prodotto %}
-    <h2>Dettagli Prodotto</h2>
-    
-    <p>Nome Prodotto: {{ prodotto[1] }}</p>
-    <p>Corsia: {{ prodotto[2] }}</p>
-    <p>Descrizione: {{ prodotto[3] }}</p>
-    <img id="productImage" alt="Prodotto Image" class="img-fluid" src="{{prodotto[4]}}">
-    
-    <br> <br>
-    <p>Per tornare al menu clicca qui -> <a href="/">Menu</a></p> 
+        <h2>Dettagli Prodotto</h2>
+        <ul>
+            {% for i in prodotto %}
+                <li>
+                    <h3>{{ i[1] }}</h3>
+                    <p> Corsia: {{i[2]}} </p>
+                    <p>Descrizione: {{ i[3] }}</p>
+                    <p>immagine prodotto<img src="{{ i[4] }}" alt="image"> </p>
+                    <p>immagine scaffale<img src="{{ i[5] }}" alt="image"> </p>
+                </li>
+            {% endfor %}
+            </ul>
+        <br> <br>
+        <p>Per tornare al menu clicca qui -> <a href="/">Menu</a></p> 
     {% endif %} 
     
 </body>

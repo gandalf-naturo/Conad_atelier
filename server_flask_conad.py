@@ -88,9 +88,13 @@ def inserisci_prodotti():
             image_path = os.path.join('static/immagini', image_filename)
             image_file.save(image_path)
             descrizione = request.form["descrizione"]
+            img_scaff_file=request.files["image_scaffale"]
+            img_scaff_filename=secure_filename(img_scaff_file.filename)
+            image_scaff_path = os.path.join('static/immagini',img_scaff_filename)
+            img_scaff_file.save(image_scaff_path)
             cur = conn.cursor()
-            cur.execute("INSERT INTO item (nome, num_corsia, desc_prod, immagine) VALUES (%s, %s, %s, %s)",
-            (nome_prodotto, corsia, descrizione, image_path))
+            cur.execute("INSERT INTO item (nome, num_corsia, desc_prod, immagine,immagine_scaffale) VALUES (%s, %s, %s, %s,%s)",
+            (nome_prodotto, corsia, descrizione, image_path,image_scaff_path))
             conn.commit()
             cur.close()
             return render_template('home.html', condizione="Prodotto inserito con successo!", username=session['username'])
@@ -103,10 +107,10 @@ def mostra_prodotti():
     else:
         if request.method=="POST":
             nome_prodotto=request.form["nome"]
-            corsia=request.form["corsia"]
             cur = conn.cursor()
-            cur.execute("SELECT * FROM item WHERE nome=%s AND num_corsia=%s", (nome_prodotto, corsia))
-            prodotto = cur.fetchone()
+            cur.execute(f"SELECT * FROM item WHERE nome LIKE '%{nome_prodotto}%'")
+
+            prodotto = cur.fetchall()
             cur.close()
             #Verifico l'esistenza del prodotto nel database 
             if prodotto:

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 12, 2024 at 04:45 PM
+-- Generation Time: Jan 30, 2024 at 01:31 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,16 +32,18 @@ CREATE TABLE `item` (
   `nome` varchar(255) NOT NULL,
   `num_corsia` int(30) DEFAULT NULL,
   `desc_prod` varchar(500) DEFAULT NULL,
-  `immagine` varchar(255) DEFAULT NULL
+  `immagine` varchar(255) DEFAULT NULL,
+  `immagine_scaffale` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`id`, `nome`, `num_corsia`, `desc_prod`, `immagine`) VALUES
-(22, 'Acqua lete', 1, 'hmm', 'static/immagini/1.jpg'),
-(23, 'Acqua panna', 1, 'b', 'static/immagini/3.jpg');
+INSERT INTO `item` (`id`, `nome`, `num_corsia`, `desc_prod`, `immagine`, `immagine_scaffale`) VALUES
+(22, 'Acqua lete', 1, 'hmm', 'static/immagini/1.jpg', ''),
+(23, 'Acqua panna', 1, 'b', 'static/immagini/3.jpg', ''),
+(25, 'zucchero', 4, 'zucchero', 'static/immagini/selfie.jpeg', '');
 
 -- --------------------------------------------------------
 
@@ -86,13 +88,13 @@ ALTER TABLE `utenti`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `utenti`
 --
 ALTER TABLE `utenti`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
