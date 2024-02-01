@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 30, 2024 at 01:31 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Creato il: Feb 01, 2024 alle 17:50
+-- Versione del server: 10.4.28-MariaDB
+-- Versione PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item`
+-- Struttura della tabella `item`
 --
 
 CREATE TABLE `item` (
@@ -36,19 +36,10 @@ CREATE TABLE `item` (
   `immagine_scaffale` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `item`
---
-
-INSERT INTO `item` (`id`, `nome`, `num_corsia`, `desc_prod`, `immagine`, `immagine_scaffale`) VALUES
-(22, 'Acqua lete', 1, 'hmm', 'static/immagini/1.jpg', ''),
-(23, 'Acqua panna', 1, 'b', 'static/immagini/3.jpg', ''),
-(25, 'zucchero', 4, 'zucchero', 'static/immagini/selfie.jpeg', '');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utenti`
+-- Struttura della tabella `utenti`
 --
 
 CREATE TABLE `utenti` (
@@ -58,40 +49,40 @@ CREATE TABLE `utenti` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `utenti`
+-- Dump dei dati per la tabella `utenti`
 --
 
 INSERT INTO `utenti` (`ID`, `username`, `password`) VALUES
 (2, 'admin', 'ADMIN');
 
 --
--- Indexes for dumped tables
+-- Indici per le tabelle scaricate
 --
 
 --
--- Indexes for table `item`
+-- Indici per le tabelle `item`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `utenti`
+-- Indici per le tabelle `utenti`
 --
 ALTER TABLE `utenti`
   ADD PRIMARY KEY (`ID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
--- AUTO_INCREMENT for table `item`
+-- AUTO_INCREMENT per la tabella `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT for table `utenti`
+-- AUTO_INCREMENT per la tabella `utenti`
 --
 ALTER TABLE `utenti`
   MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
