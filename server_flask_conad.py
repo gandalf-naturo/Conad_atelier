@@ -6,13 +6,32 @@ import os
 app = Flask(__name__,template_folder='template')
 app.secret_key=os.urandom(24)
 
-conn = mysql.connector.connect(
+LOCAL_DB = False
+conn = object
+try:
+    from local_settings import LOCAL_DB
+except ImportError:
+    print("Looks like no local file. You must be on production")
+
+if LOCAL_DB:
+    print("Stai lavorando in locale!!!!!")
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="conad_atelier",
+        port=3306,
+        )
+else:
+    conn = mysql.connector.connect(
         host="EinaudiLocal.mysql.pythonanywhere-services.com",
         user="EinaudiLocal",
         password="loredana72",
         database="EinaudiLocal$default",
         port=3306,
-        )
+        ) 
+
+
 
 @app.route('/')
 def home():
@@ -85,12 +104,12 @@ def inserisci_prodotti():
             # Continuo con l'inserimento se il prodotto non esiste già
             image_file = request.files["image"]
             image_filename = secure_filename(image_file.filename)
-            image_path = os.path.join('/static/immagini', image_filename)
+            image_path = os.path.join('static/immagini/', image_filename)
             image_file.save(image_path)
             descrizione = request.form["descrizione"]
             img_scaff_file=request.files["image_scaffale"]
             img_scaff_filename=secure_filename(img_scaff_file.filename)
-            image_scaff_path = os.path.join('/static/immagini',img_scaff_filename)
+            image_scaff_path = os.path.join('static/immagini/',img_scaff_filename)
             img_scaff_file.save(image_scaff_path)
             cur = conn.cursor()
             cur.execute("INSERT INTO item (nome, num_corsia, desc_prod, immagine,immagine_scaffale) VALUES (%s, %s, %s, %s,%s)",
@@ -168,3 +187,5 @@ def elimina():
 
 if __name__=='__main__':
     app.run(debug=True)
+
+    
