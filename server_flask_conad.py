@@ -1,6 +1,6 @@
 from flask import Flask, request,session,render_template,url_for,redirect,jsonify
 from werkzeug.utils import secure_filename
-import mysql.connector
+import pymysql 
 import os
 
 app = Flask(__name__,template_folder='template')
@@ -15,7 +15,7 @@ except ImportError:
 
 if LOCAL_DB:
     print("Stai lavorando in locale!!!!!")
-    conn = mysql.connector.connect(
+    conn = pymysql.connect(
         host="localhost",
         user="root",
         password="",
@@ -23,7 +23,7 @@ if LOCAL_DB:
         port=3306,
         )
 else:
-    conn = mysql.connector.connect(
+    conn = pymysql.connect(
         host="EinaudiLocal.mysql.pythonanywhere-services.com",
         user="EinaudiLocal",
         password="loredana72",
