@@ -30,6 +30,8 @@ else:
         database="EinaudiLocal$default",
         port=3306,
         ) 
+def check(conn):
+    conn.ping(reconnect=True)
 
 
 
@@ -43,6 +45,7 @@ def home():
 @app.route('/login',methods=['GET','POST'])
 def login():
     if request.method=='POST':
+        check(conn)
         username=request.form['username']
         pwd=request.form['password']
         cur=conn.cursor()
@@ -60,6 +63,7 @@ def login():
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == "POST":
+        check(conn)
         username = request.form["username"]
         pwd = request.form['password']
 
@@ -91,6 +95,7 @@ def inserisci_prodotti():
         return redirect(url_for('home'))
     else:
         if request.method == "POST":
+            check(conn)
             nome_prodotto = request.form["nome"]
             corsia = request.form["corsia"]
             # Verifico se esiste già un prodotto con lo stesso nome nella stessa corsia
@@ -125,6 +130,7 @@ def mostra_prodotti():
         return redirect(url_for('home'))
     else:
         if request.method=="POST":
+            check(conn)
             nome_prodotto=request.form["nome"]
             cur = conn.cursor()
             cur.execute(f"SELECT * FROM item WHERE nome LIKE '%{nome_prodotto}%'")
@@ -146,6 +152,7 @@ def mostra_corsia():
         return redirect(url_for('home'))
     else:
         if request.method=="POST":
+            check(conn)
             corsia=request.form["corsia"]
             cur = conn.cursor()
             cur.execute(f" SELECT * FROM item WHERE num_corsia= {corsia}")
@@ -164,6 +171,7 @@ def elimina():
         return redirect(url_for('home'))
     else:
         if request.method=="POST":
+            check(conn)
             nome_prodotto=request.form["nome"]
             corsia=request.form["corsia"]
             cur = conn.cursor()
