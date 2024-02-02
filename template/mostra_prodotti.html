@@ -1,40 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layout.html" %} {% block content %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Mostra_Prodotti</title>
 </head>
-<body>
-   
-    <h1>Scelta prodotti da Cercare: </h1>
-    {% if errore %}
-        <p style="color:red;">{{errore}}</p>
-    {% endif %}
-    <form action="/mostra_prodotti"method="post">
-        <label for="nome">Inserisci il nome del prodotto da ricercare: </label>
-        <input type="text" id="nome" name="nome" required><br><br>
-        <input type="submit" value="Ricerca prodotto">
-    </form>
-    <br><br>
-    <p>Per tornare al menu clicca qui -> <a href="/">Menu</a></p>
-    {% if prodotto %}
-        <h2>Dettagli Prodotto</h2>
-        <ul>
-            {% for i in prodotto %}
-                <li>
-                    <h3>{{ i[1] }}</h3>
-                    <p> Corsia: {{i[2]}} </p>
-                    <p>Descrizione: {{ i[3] }}</p>
-                    <p>immagine prodotto<img src="{{ i[4] }}" alt="image"> </p>
-                    <p>immagine scaffale<img src="{{ i[5] }}" alt="image"> </p>
-                </li>
-            {% endfor %}
-            </ul>
-        <br> <br>
-        <p>Per tornare al menu clicca qui -> <a href="/">Menu</a></p> 
-    {% endif %} 
+
+    <div class="container">
+        <h1>Scelta prodotti da Cercare: </h1>
+        {% if errore %}
+            <p style="color:red;">{{errore}}</p>
+        {% endif %}
+        <form action="/mostra_prodotti"method="post">
+            <label for="nome">Inserisci il nome del prodotto da ricercare: </label>
+            <input type="text" id="nome" name="nome" required><br><br>
+            <input type="submit" value="Ricerca prodotto">
+        </form>
+        <br><br>
+        {% if prodotto %}
+            <h2>Dettagli Prodotto</h2>
+            <ul>
+                {% for i in prodotto %}
+                    <li>
+                        <h3>{{ i[1] }}</h3>
+                        <p> Corsia: {{i[2]}} </p>
+                        <p>Descrizione: {{ i[3] }}</p>
+                        <p>immagine prodotto<img src="{{ i[4] }}" alt="image"> </p>
+                        <p>immagine scaffale<img src="{{ i[5] }}" alt="image"> </p>
+                    </li>
+                {% endfor %}
+                </ul>
+            <br> <br>
+        {% endif %} 
     
-</body>
-</html>
+    </div>
+{% endblock %}

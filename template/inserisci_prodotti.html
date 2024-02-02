@@ -1,32 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layout.html" %} {% block content %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Prodotti</title>
 </head>
-<body>
-    <h1> Inserimento Prodotti</h1>
-    {% if error %}
-        <p style="color: red;">{{ error}}</p>
-    {% endif %}
-    <form action="/inserisci_prodotti" method="post" enctype="multipart/form-data">
-        <label for="nome">Inserisci il nome del prodotto: </label>
-        <input type="text" id="nome" name="nome" required><br><br>
-        <label for="image">Seleziona un'immagine del prodotto:</label>
-        <input type="file" name="image" accept="image/*" required><br><br>
-        <label for="image_scaffale">Seleziona un'immagine dello scaffale</label>
-        <input type="file" name="image_scaffale"accept="image/*" required><br><br>> 
-        <label for="corsia">Inserisci il numero della corsia: </label>
-        <input type="text" id="corsia" name="corsia"required><br><br>
-        <label for="descrizione">Inserisci la descrizione del prodotto:</label>
-        <input type="text" id="descrizione" name="descrizione"><br><br>
-        <input type="submit" value="Aggiungi prodotto">
-    </form>
-    <br><br>
+    <div class="container">
 
-    <p>Per tornare al menu clicca qui -> <a href="/">Menu</a></p>
-    
-</body>
-</html>
+        <h1> Inserimento Prodotti</h1>
+        {% if error %}
+            <p style="color: red;">{{ error}}</p>
+        {% endif %}
+        
+        <form action="/inserisci_prodotti" method="post" enctype="multipart/form-data">
+            <label for="nome">Inserisci il nome del prodotto: </label>
+            <input type="text" id="nome" name="nome" required><br><br>
+            <label for="image">Seleziona un'immagine del prodotto:</label>
+            <input type="file" name="image" accept="image/*" required><br><br>
+            <label for="image_scaffale">Seleziona un'immagine dello scaffale</label>
+            <input type="file" name="image_scaffale"accept="image/*" required><br><br> 
+            <label for="corsia">Inserisci il numero della corsia: </label>
+            <input type="text" id="corsia" name="corsia"required><br><br>
+            <label for="descrizione">Inserisci la descrizione del prodotto:</label>
+            <input type="text" id="descrizione" name="descrizione"><br><br>
+            <input type="submit" value="Aggiungi prodotto">
+        </form>
+        <br><br>
+
+    </div>
+
+
+{% endblock %}

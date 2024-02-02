@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <img src="static/logo einaudi web.jpg" alt="Logo Einaudi">
+          </div>
+            <div class="header-right">
+              <a class="home-button" href="/">Home</a>
+              <a class="logout" href="/logout">Logout</a>
+            </div>
+          
+    </header>
+
+    {% block content %}{% endblock %}
+    {% include "footer.html" %}
+</body>
+
+</html>

@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layout.html" %} {% block content %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Elimina Prodotto</title>
     <script>
         function confermaEliminazione() {
@@ -18,20 +14,20 @@
         }
     </script>
 </head>
-<body>
-    <h1> Eliminazione prodotti:</h1>
-    {% if condizione%}
-        <p style="color: red;">{{ condizione}}</p>
-    {% endif %}
-    <form id="moduloEliminazione" action="/elimina" method="post" onsubmit="return confermaEliminazione()">
-        <label for="nome">Inserisci il nome del prodotto da eliminare: </label>
-        <input type="text" id="nome" name="nome" required><br><br>
-        <label for="corsia">Inserisci il numero della corsia del prodotto: </label>
-        <input type="text" id="corsia" name="corsia" required><br><br>
-        <input type="submit" value="Elimina prodotto">
-    </form>
 
-    <p>Per tornare al menu clicca qui -> <a href="/">Menu</a></p>
+    <div class="container">
+        <h1> Eliminazione prodotti:</h1>
+        {% if condizione%}
+            <p style="color: red;">{{ condizione}}</p>
+        {% endif %}
+        <form id="moduloEliminazione" action="/elimina" method="post" onsubmit="return confermaEliminazione()">
+            <label for="nome">Inserisci il nome del prodotto da eliminare: </label>
+            <input type="text" id="nome" name="nome" required><br><br>
+            <label for="corsia">Inserisci il numero della corsia del prodotto: </label>
+            <input type="text" id="corsia" name="corsia" required><br><br>
+            <input type="submit" value="Elimina prodotto">
+        </form>
+
+    </div>
     
-</body>
-</html>
+{% endblock %}
