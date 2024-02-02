@@ -85,12 +85,12 @@ def inserisci_prodotti():
             # Continuo con l'inserimento se il prodotto non esiste già
             image_file = request.files["image"]
             image_filename = secure_filename(image_file.filename)
-            image_path = os.path.join('/home/EinaudiLocal/mysite/static/immagini', image_filename)
+            image_path = os.path.join('/home/EinaudiLocal/Conad_atelier/static/immagini', image_filename)
             image_file.save(image_path)
             descrizione = request.form["descrizione"]
             img_scaff_file=request.files["image_scaffale"]
             img_scaff_filename=secure_filename(img_scaff_file.filename)
-            image_scaff_path = os.path.join('/home/EinaudiLocal/mysite/static/immagini',img_scaff_filename)
+            image_scaff_path = os.path.join('/home/EinaudiLocal/Conad_atelier/static/immagini',img_scaff_filename)
             img_scaff_file.save(image_scaff_path)
             cur = conn.cursor()
             cur.execute("INSERT INTO item (nome, num_corsia, desc_prod, immagine,immagine_scaffale) VALUES (%s, %s, %s, %s,%s)",
