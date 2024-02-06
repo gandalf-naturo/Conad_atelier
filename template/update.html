@@ -1,0 +1,64 @@
+{% extends "layout.html" %} {% block content %}
+<head>
+    <title>Modifica Prodotto</title>
+    <script>
+        function mostraCampoInput() {
+            var campoSelezionato = document.getElementById("campo").value;
+            var campoInput = document.getElementById("campo-input");
+
+            // Mostra o nascondi il campo di input in base alla scelta
+            if (campoSelezionato === "nome") {
+                document.getElementById("label-input").innerHTML = "Nuovo Nome:";
+                campoInput.type = "text";
+                campoInput.name = "nuovo_nome";
+                campoInput.placeholder = "Inserisci il nuovo nome";
+            } else if (campoSelezionato === "descrizione") {
+                document.getElementById("label-input").innerHTML = "Nuova Descrizione:";
+                campoInput.type = "text";
+                campoInput.name = "nuova_descrizione";
+                campoInput.placeholder = "Inserisci la nuova descrizione";
+            } else if (campoSelezionato === "immagine_prodotto") {
+                document.getElementById("label-input").innerHTML = "Nuova Immagine:";
+                campoInput.type = "file", accept="image/*" ;
+                campoInput.name = "nuova_immagine_prodotto";
+            } else if (campoSelezionato === "corsia") {
+                document.getElementById("label-input").innerHTML = "Nuova Corsia:";
+                campoInput.type = "text";
+                campoInput.name = "nuova_corsia";
+                campoInput.placeholder = "Inserisci la nuova corsia";
+            } else if (campoSelezionato === "immagine_scaffale") {
+            document.getElementById("label-input").innerHTML = "Nuova Immagine Scaffale:";
+            campoInput.type = "file",accept="image/*" ;
+            campoInput.name = "nuova_immagine_scaffale";
+            
+            }
+        }
+    </script>
+</head>
+
+<div class="container">
+    <h1>Modifica Prodotto</h1>
+    {% if errore %}
+        <p style="color:red;">{{errore}}</p>
+    {% endif %}
+    <form action="/update" method="post">
+        <label for="nome_prodotto">Nome Prodotto da Modificare:</label>
+        <input type="text" id="nome_prodotto" name="nome" placeholder="Inserisci il nome del prodotto"><br><br>
+
+        <label for="campo">Seleziona Campo da Modificare:</label>
+        <select name="campo" id="campo" onchange="mostraCampoInput()">
+            <option value="nome">Nome</option>
+            <option value="descrizione">Descrizione</option>
+            <option value="immagine_prodotto">Immagine prodotto</option>
+            <option value="immagine_scaffale">Immagine scaffale</option>
+            <option value="corsia">Corsia</option>
+        </select><br><br>
+
+        <label id="label-input" for="campo-input">Nuovo Nome:</label>
+        <input type="text" id="campo-input" name="nuovo_nome" placeholder="Inserisci il nuovo nome"><br><br>
+
+        <input type="submit" value="Aggiorna">
+    </form>
+
+</div>
+{% endblock %}

@@ -191,6 +191,58 @@ def elimina():
         else:
             return render_template('elimina.html')
 
+@app.route("/update", methods=['GET','POST'])
+def update():
+    if 'username' not in session:
+        return redirect(url_for('home'))
+    else:
+        if request.method == "POST":
+            check(conn)
+            nome_prodotto = request.form["nome"]
+            campo_da_modificare = request.form["campo"]
+           
+
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM item WHERE nome=%s", (nome_prodotto,))
+            prodotto = cur.fetchone()
+
+            if prodotto:
+                if campo_da_modificare == "nome":
+                    nuovo_valore = request.form["nuovo_nome"]
+                    cur.execute("UPDATE item SET nome = %s WHERE nome = %s", (nuovo_valore, nome_prodotto))
+                elif campo_da_modificare == "descrizione":
+                    nuovo_valore = request.form["nuova_descrizione"]
+                    cur.execute("UPDATE item SET desc_prod = %s WHERE nome = %s", (nuovo_valore, nome_prodotto))
+                elif campo_da_modificare == "immagine":
+                    nuova_immagine_prodotto = request.files["nuova_immagine_prodotto"]
+                    nuova_immagine_prodotto_filename = secure_filename(nuova_immagine_prodotto.filename)
+                    nuova_immagine_prodotto_path = os.path.join('static/immagini/', nuova_immagine_prodotto_filename)
+                    nuova_immagine_prodotto.save(nuova_immagine_prodotto_path)
+                    cur.execute("UPDATE item SET immagine = %s WHERE nome = %s", (nuova_immagine_prodotto_path, nome_prodotto))
+                elif campo_da_modificare == "corsia":
+                    nuovo_valore = request.form["nuova_corsia"]
+                    cur.execute("UPDATE item SET num_corsia = %s WHERE nome = %s", (nuovo_valore, nome_prodotto))
+                elif campo_da_modificare == "immagine_scaffale":
+                    nuova_immagine_scaffale = request.files["nuova_immagine_scaffale"]
+                    nuova_immagine_filename_scaffale = secure_filename(nuova_immagine_scaffale.filename)
+                    nuova_immagine_scaffale_path = os.path.join('static/immagini/', nuova_immagine_filename_scaffale)
+                    nuova_immagine_scaffale.save(nuova_immagine_scaffale_path)
+                    cur.execute("UPDATE item SET immagine_scaffale = %s WHERE nome = %s", (nuova_immagine_scaffale_path, nome_prodotto))
+
+                conn.commit()
+                cur.close()
+
+                return render_template('update.html', errore="Prodotto aggiornato con successo.", username=session['username'])
+            else:
+                cur.close()
+                return render_template('update.html', errore="Prodotto non trovato.", username=session['username'])
+        else:
+            return render_template('update.html')
+
+            
+
+
+
 
 
 if __name__=='__main__':
