@@ -17,8 +17,11 @@
 
     <div class="container">
         <h1> Eliminazione prodotti:</h1>
-        {% if condizione%}
-            <p style="color: red;">{{ condizione}}</p>
+        {% if errore %}
+            <p style="color:red;">{{errore}}</p>
+        {% endif %}
+        {% if successo %}
+            <p style="color:green;">{{successo}}</p>
         {% endif %}
         <form id="moduloEliminazione" action="/elimina" method="post" onsubmit="return confermaEliminazione()">
             <label for="nome">Inserisci il nome del prodotto da eliminare: </label>

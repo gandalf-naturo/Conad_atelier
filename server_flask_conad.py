@@ -57,7 +57,7 @@ def login():
             session['username']=user[0]
             return redirect(url_for('home'))
         else:
-            return render_template('login.html',error="username o password errate")
+            return render_template('login.html',errore="username o password errate")
     return render_template('login.html')
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -105,7 +105,7 @@ def inserisci_prodotti():
             cur.close()
             if existing_product:
                 # Se il prodotto esiste già, mostra un messaggio di errore
-                return render_template('inserisci_prodotti.html', username=session['username'], error="Prodotto già presente nella corsia.")
+                return render_template('inserisci_prodotti.html', username=session['username'], errore="Prodotto già presente nella corsia.")
             # Continuo con l'inserimento se il prodotto non esiste già
             image_file = request.files["image"]
             image_filename = secure_filename(image_file.filename)
@@ -121,7 +121,7 @@ def inserisci_prodotti():
             (nome_prodotto, corsia, descrizione, image_path,image_scaff_path))
             conn.commit()
             cur.close()
-            return render_template('home.html', condizione="Prodotto inserito con successo!", username=session['username'])
+            return render_template('home.html', successo="Prodotto inserito con successo!", username=session['username'])
         return render_template('inserisci_prodotti.html', username=session['username'])
 
 @app.route("/mostra_prodotti",methods=['GET','POST'])
@@ -184,10 +184,10 @@ def elimina():
                 cur.execute("DELETE FROM item WHERE nome=%s AND num_corsia=%s", (nome_prodotto, corsia))
                 conn.commit()
                 cur.close()
-                return render_template('elimina.html',condizione="Prodotto eliminato con successo " )
+                return render_template('elimina.html',successo="Prodotto eliminato con successo " )
             else:
                 #se non esiste mostro un messaggio di errore
-                return render_template('elimina.html', condizione="Prodotto non trovato.", username=session['username'])
+                return render_template('elimina.html', errore="Prodotto non trovato.", username=session['username'])
         else:
             return render_template('elimina.html')
 
@@ -232,7 +232,7 @@ def update():
                 conn.commit()
                 cur.close()
 
-                return render_template('update.html', errore="Prodotto aggiornato con successo.", username=session['username'])
+                return render_template('update.html', successo="Prodotto aggiornato con successo.", username=session['username'])
             else:
                 cur.close()
                 return render_template('update.html', errore="Prodotto non trovato.", username=session['username'])

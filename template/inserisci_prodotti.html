@@ -5,8 +5,11 @@
     <div class="container">
 
         <h1> Inserimento Prodotti</h1>
-        {% if error %}
-            <p style="color: red;">{{ error}}</p>
+        {% if errore %}
+            <p style="color:red;">{{errore}}</p>
+        {% endif %}
+        {% if successo %}
+            <p style="color:green;">{{successo}}</p>
         {% endif %}
         
         <form action="/inserisci_prodotti" method="post" enctype="multipart/form-data">

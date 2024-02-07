@@ -43,6 +43,9 @@
     {% if errore %}
         <p style="color:red;">{{errore}}</p>
     {% endif %}
+    {% if successo %}
+        <p style="color:green;">{{successo}}</p>
+    {% endif %}
     <form action="/update" method="post" enctype="multipart/form-data">
         <label for="nome_prodotto">Nome Prodotto da Modificare:</label>
         <input type="text" id="nome_prodotto" name="nome" placeholder="Inserisci il nome del prodotto"><br><br>

@@ -6,9 +6,12 @@
         <h1>Home</h1>
         
         {% if username %}
-            {% if condizione %}
-                <p style="color: red;"><b>{{ condizione }}</b></p>
-            {% endif %}
+        {% if errore %}
+            <p style="color:red;">{{errore}}</p>
+        {% endif %}
+        {% if successo %}
+            <p style="color:green;">{{successo}}</p>
+        {% endif %}
             <p>Salve, {{ username}}!</p>
             <h2>Inserimento,eliminazione e modifica prodotti:</h2>
             <p><a href="/inserisci_prodotti" class="button">Inserisci Prodotti</a></p>
