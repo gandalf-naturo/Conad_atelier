@@ -213,7 +213,7 @@ def update():
                 elif campo_da_modificare == "descrizione":
                     nuovo_valore = request.form["nuova_descrizione"]
                     cur.execute("UPDATE item SET desc_prod = %s WHERE nome = %s", (nuovo_valore, nome_prodotto))
-                elif campo_da_modificare == "immagine":
+                elif campo_da_modificare == "immagine_prodotto":
                     nuova_immagine_prodotto = request.files["nuova_immagine_prodotto"]
                     nuova_immagine_prodotto_filename = secure_filename(nuova_immagine_prodotto.filename)
                     nuova_immagine_prodotto_path = os.path.join('static/immagini/', nuova_immagine_prodotto_filename)
