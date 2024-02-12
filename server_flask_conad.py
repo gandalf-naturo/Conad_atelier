@@ -1,6 +1,7 @@
 from flask import Flask, request,session,render_template,url_for,redirect,jsonify
 from werkzeug.utils import secure_filename
 import pymysql 
+from PIL import Image 
 import os
 
 app = Flask(__name__,template_folder='template')
@@ -108,22 +109,26 @@ def inserisci_prodotti():
                 return render_template('inserisci_prodotti.html', username=session['username'], errore="Prodotto già presente nella corsia.")
             # Continuo con l'inserimento se il prodotto non esiste già
             image_file = request.files["image"]
+            image = Image.open(image_file)
+            image.thumbnail((300, 300))  # Riduci l'immagine a una dimensione massima di 300x300
             image_filename = secure_filename(image_file.filename)
             image_path = os.path.join('static/immagini/', image_filename)
-            image_file.save(image_path)
+            image.save(image_path)  # Salva l'immagine ridotta
             descrizione = request.form["descrizione"]
-            img_scaff_file=request.files["image_scaffale"]
-            img_scaff_filename=secure_filename(img_scaff_file.filename)
-            image_scaff_path = os.path.join('static/immagini/',img_scaff_filename)
-            img_scaff_file.save(image_scaff_path)
+            img_scaff_file = request.files["image_scaffale"]
+            img_scaff = Image.open(img_scaff_file)
+            img_scaff.thumbnail((300, 300))  # Riduci l'immagine a una dimensione massima di 300x300
+            img_scaff_filename = secure_filename(img_scaff_file.filename)
+            image_scaff_path = os.path.join('static/immagini/', img_scaff_filename)
+            img_scaff.save(image_scaff_path)  # Salva l'immagine ridotta
             cur = conn.cursor()
-            cur.execute("INSERT INTO item (nome, num_corsia, desc_prod, immagine,immagine_scaffale) VALUES (%s, %s, %s, %s,%s)",
-            (nome_prodotto, corsia, descrizione, image_path,image_scaff_path))
+            cur.execute("INSERT INTO item (nome, num_corsia, desc_prod, immagine, immagine_scaffale) VALUES (%s, %s, %s, %s, %s)",
+                        (nome_prodotto, corsia, descrizione, image_path, image_scaff_path))
             conn.commit()
             cur.close()
             return render_template('home.html', successo="Prodotto inserito con successo!", username=session['username'])
         return render_template('inserisci_prodotti.html', username=session['username'])
-
+    
 @app.route("/mostra_prodotti",methods=['GET','POST'])
 def mostra_prodotti():
     if 'username' not in session:
