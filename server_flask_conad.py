@@ -112,14 +112,14 @@ def inserisci_prodotti():
             image = Image.open(image_file)
             image.thumbnail((300, 300))  # Riduci l'immagine a una dimensione massima di 300x300
             image_filename = secure_filename(image_file.filename)
-            image_path = os.path.join('static/immagini1/', image_filename)
+            image_path = os.path.join('static/immagini/', image_filename)
             image.save(image_path)  # Salva l'immagine ridotta
             descrizione = request.form["descrizione"]
             img_scaff_file = request.files["image_scaffale"]
             img_scaff = Image.open(img_scaff_file)
             img_scaff.thumbnail((300, 300))  # Riduci l'immagine a una dimensione massima di 300x300
             img_scaff_filename = secure_filename(img_scaff_file.filename)
-            image_scaff_path = os.path.join('static/immagini1/', img_scaff_filename)
+            image_scaff_path = os.path.join('static/immagini/', img_scaff_filename)
             img_scaff.save(image_scaff_path)  # Salva l'immagine ridotta
             cur = conn.cursor()
             cur.execute("INSERT INTO item (nome, num_corsia, desc_prod, immagine, immagine_scaffale) VALUES (%s, %s, %s, %s, %s)",
@@ -221,7 +221,7 @@ def update():
                 elif campo_da_modificare == "immagine_prodotto":
                     nuova_immagine_prodotto = request.files["nuova_immagine_prodotto"]
                     nuova_immagine_prodotto_filename = secure_filename(nuova_immagine_prodotto.filename)
-                    nuova_immagine_prodotto_path = os.path.join('static/immagini1/', nuova_immagine_prodotto_filename)
+                    nuova_immagine_prodotto_path = os.path.join('static/immagini/', nuova_immagine_prodotto_filename)
                     nuova_immagine_prodotto.save(nuova_immagine_prodotto_path)
                     cur.execute("UPDATE item SET immagine = %s WHERE nome = %s", (nuova_immagine_prodotto_path, nome_prodotto))
                 elif campo_da_modificare == "corsia":
@@ -230,7 +230,7 @@ def update():
                 elif campo_da_modificare == "immagine_scaffale":
                     nuova_immagine_scaffale = request.files["nuova_immagine_scaffale"]
                     nuova_immagine_filename_scaffale = secure_filename(nuova_immagine_scaffale.filename)
-                    nuova_immagine_scaffale_path = os.path.join('static/immagini1/', nuova_immagine_filename_scaffale)
+                    nuova_immagine_scaffale_path = os.path.join('static/immagini/', nuova_immagine_filename_scaffale)
                     nuova_immagine_scaffale.save(nuova_immagine_scaffale_path)
                     cur.execute("UPDATE item SET immagine_scaffale = %s WHERE nome = %s", (nuova_immagine_scaffale_path, nome_prodotto))
 
