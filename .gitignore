@@ -2,4 +2,5 @@ venv
 .venv
 local_settings.py
 __pycache__
-static/immagini/
+static/
+
