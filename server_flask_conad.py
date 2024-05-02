@@ -21,7 +21,7 @@ if LOCAL_DB:
         user="root",
         password="",
         database="conad_atelier",
-        port=3307,
+        port=3306,
         )
 else:
     conn = pymysql.connect(
