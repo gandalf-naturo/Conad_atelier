@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import pymysql 
 from PIL import Image 
 import os
+import bcrypt
 
 app = Flask(__name__,template_folder='template')
 app.secret_key=os.urandom(24)
@@ -52,9 +53,8 @@ def login():
         cur=conn.cursor()
         cur.execute(f"SELECT username,password FROM utenti WHERE username='{username}'")
         user=cur.fetchone()
-
         cur.close()
-        if user and pwd == user[1]:
+        if user and bcrypt.checkpw(pwd.encode(),user[1].encode()):
             session['username']=user[0]
             return redirect(url_for('home'))
         else:
@@ -67,6 +67,8 @@ def register():
         check(conn)
         username = request.form["username"]
         pwd = request.form['password']
+        pwd=pwd.encode()
+        hashed_pwd=bcrypt.hashpw(pwd,bcrypt.gensalt())
 
         # Controllo se l'utente esiste già nel database
         cur = conn.cursor()
@@ -78,7 +80,7 @@ def register():
             return render_template('register.html', error="Username già in uso. Scegli un altro username.")
 
         # Inserisco i dati nel database se l'utente non esiste già
-        cur.execute("INSERT INTO utenti(username, password) VALUES (%s, %s)", (username, pwd))
+        cur.execute("INSERT INTO utenti(username, password) VALUES (%s, %s)", (username, hashed_pwd))
         conn.commit()
         cur.close()
 
