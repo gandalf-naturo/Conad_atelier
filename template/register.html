@@ -1,4 +1,5 @@
-{% extends "layout.html" %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Registrazione</title>
     <script>
@@ -14,25 +15,44 @@
             return true;
         }
     </script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+<body>
+    <div class="container_logged">
 
-    <div class="container">
-
-        <h1> Registrazione</h1>
+        
         {% if error %}
             <p style="color: red;">{{error}}</p>
         {% endif %}
 
-        <form method="POST" action="/register" onsubmit="return validateForm()">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
-            <label for="conferma_password">Conferma Password:</label>
-            <input type="password" id="conferma_password" name="conferma_password" required>
-            
-            <input type="submit" value="Register">
+             <div class="container">
+                <div class="box form-box">
+                    <header>Registrazione CONAD ATELIER</header>
+                    <form method="POST" action="/register" onsubmit="return validateForm()">
+                        <div class="field input">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username" autocomplete="off" required>
+                        </div>
+        
+                        <div class="field input">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" autocomplete="off" required>
+                        </div>
+                        <div class="field input">
+                            <label for="conferma_password">Conferma Password:</label>
+                            <input type="password" id="conferma_password" name="conferma_password" required>
+                        </div>
+                        <div class="field">
+                            <input type="submit" class="btn" name="submit" value="registrati" required>
+                        </div>
+                        <div class="links">
+                            sei già membro? <a style="color: #8766a0" href="/">login</a>
+                        </div>
+                </div>
+              </div>
         </form>
 
     </div>
-{% endblock %}
+</body>
+</html>

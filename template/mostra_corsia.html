@@ -1,13 +1,17 @@
-{% extends "layout.html" %} {% block content %}
+<div class="header-right">
+    <a class="logout" href="/logout">Logout</a>
+    <a class="home-button" href="/">Home</a>
+         
+</div>
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Mostra Corsia</title>
 </head>
-
-    <div class="container">
+    <div class="mostra_centro">
 
         <h1>Mostra contenuto corsie:</h1>
         {% if errore %}
-            <p style="color:red;">{{errore}}</p>
+            <p class="message_error">{{errore}}</p>
         {% endif %}
         <form action="/mostra_corsia" method="post">
             <label for="corsia">Inserisci il numero della corsia che vuoi visualizzare:</label>
@@ -28,6 +32,4 @@
             {% endfor %}
             </ul>
         {% endif %}
-    
     </div>
-{% endblock %}

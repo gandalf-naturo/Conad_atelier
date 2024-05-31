@@ -1,5 +1,5 @@
-{% extends "layout.html" %} {% block content %}
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Elimina Prodotto</title>
     <script>
         function confermaEliminazione() {
@@ -14,14 +14,19 @@
         }
     </script>
 </head>
-
-    <div class="container">
+<div class="header-right">
+    <a class="logout" href="/logout">Logout</a>
+    <a class="home-button" href="/">Home</a>
+         
+</div>
+    <div class="container_logged">
+        <center>
         <h1> Eliminazione prodotti:</h1>
         {% if errore %}
-            <p style="color:red;">{{errore}}</p>
+            <p class="message_error">{{errore}}</p>
         {% endif %}
         {% if successo %}
-            <p style="color:green;">{{successo}}</p>
+            <p class="message_success">{{successo}}</p>
         {% endif %}
         <form id="moduloEliminazione" action="/elimina" method="post" onsubmit="return confermaEliminazione()">
             <label for="nome">Inserisci il nome del prodotto da eliminare: </label>
@@ -30,7 +35,6 @@
             <input type="text" id="corsia" name="corsia" required><br><br>
             <input type="submit" value="Elimina prodotto">
         </form>
-
+        </center>
     </div>
     
-{% endblock %}

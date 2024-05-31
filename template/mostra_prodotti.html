@@ -1,12 +1,17 @@
-{% extends "layout.html" %} {% block content %}
+<div class="header-right">
+    <a class="logout" href="/logout">Logout</a>
+    <a class="home-button" href="/">Home</a>
+         
+</div>
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Mostra_Prodotti</title>
 </head>
 
-    <div class="container">
+    <div class="mostra_centro">
         <h1>Scelta prodotti da Cercare: </h1>
         {% if errore %}
-            <p style="color:red;">{{errore}}</p>
+            <p class="message_error">{{errore}}</p>
         {% endif %}
         <form action="/mostra_prodotti"method="post">
             <label for="nome">Inserisci il nome del prodotto da ricercare: </label>
@@ -31,4 +36,3 @@
         {% endif %} 
     
     </div>
-{% endblock %}

@@ -1,15 +1,21 @@
-{% extends "layout.html" %} {% block content %}
+
+<div class="header-right">
+    <a class="logout" href="/logout">Logout</a>
+    <a class="home-button" href="/">Home</a>
+         
+</div>
+
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Prodotti</title>
 </head>
-    <div class="container">
-
+    <div class="container_logged">
         <h1> Inserimento Prodotti</h1>
         {% if errore %}
-            <p style="color:red;">{{errore}}</p>
+            <p class="message_error">{{errore}}</p>
         {% endif %}
         {% if successo %}
-            <p style="color:green;">{{successo}}</p>
+            <p class="message_success">{{successo}}</p>
         {% endif %}
         
         <form action="/inserisci_prodotti" method="post" enctype="multipart/form-data">
@@ -26,8 +32,6 @@
             <input type="submit" value="Aggiungi prodotto">
         </form>
         <br><br>
-
     </div>
 
 
-{% endblock %}

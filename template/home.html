@@ -1,32 +1,70 @@
-{% extends "layout.html" %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-    <div class="container">
-        <h1>Home</h1>
+<body>
+    {% if username %}
+<div class="saluto">Ciao {{ username }}</div>
+{% endif %}
+<div class="container_logged">
+    {% if username %}
+    <div class="header-right">
+        <a class="logout" href="/logout">Logout</a>
+        <a class="home-button" href="/">Home</a>
         
-        {% if username %}
+</div>
+    <center>
+    <h1 class="gestione_h1">Benvenuto al Conad Atelier </strong></h1>
+    <div class="gestione">
         {% if errore %}
-            <p style="color:red;">{{errore}}</p>
+            <p class="message_error">{{ errore }}</p>
         {% endif %}
         {% if successo %}
-            <p style="color:green;">{{successo}}</p>
+            <p class="message_success">{{ successo }}</p>
         {% endif %}
-            <p>Salve, {{ username}}!</p>
-            <h2>Inserimento,eliminazione e modifica prodotti:</h2>
-            <p><a href="/inserisci_prodotti" class="button">Inserisci Prodotti</a></p>
-            <p><a href="/elimina" class="button">Elimina Prodotti</a></p>
-            <p><a href="/update" class="button">Modifica Prodotti</a></p>
-            <h2>Visualizzazione prodotti e corsie:</h2>
-            <p><a href="/mostra_prodotti" class="button">Mostra Prodotti</a></p>
-            <p><a href="/mostra_corsia" class="button">Mostra Corsia</a></p>
-            <br><br>
-        {% else %}
-            <p>Prima di poter inserire i prodotti occorre essere loggato!</p>
-            <p>Non sei loggato, <a href="/login" class="button">login</a> per accedere alla home page</p>
-            <p>Se non sei registrato puoi farlo qui!: <a href="/register" class="button">Registrati</a></p>
-        {% endif %}
+        <h2>Gestione prodotti:</h2>
+        <p><a href="/inserisci_prodotti" class="button">inserisci prodotti</a></p>
+        <p><a href="/elimina" class="button">elimina prodotti</a></p>
+        <p><a href="/update" class="button">update prodotti</a></p>
+        <h2>Vedi prodotti e corsie:</h2>
+        <p><a href="/mostra_prodotti" class="button">mostra prodotti</a></p>
+        <p><a href="/mostra_corsia" class="button">mostra corsia</a></p>
+    {% else %}
+    {% if errore %}
+    <p class="message_error">{{ errore }}</p>
+    {% endif %}
     </div>
-    
+    </center>
+</div>
+    <div class="container">
+        <div class="box form-box">
+            <header>Login CONAD ATELIER</header>
+            <form action="/login" method="post">
+                <div class="field input">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" autocomplete="off" required>
+                </div>
 
-{% endblock %}
+                <div class="field input">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" autocomplete="off" required>
+                </div>
+
+                <div class="field">
+                    
+                    <input type="submit" class="btn" name="submit" value="Login" required>
+                </div>
+                <div class="links">
+                    non hai un'account? <a style="color: #8766a0" href="/register">registrati</a>
+                </div>
+            </form>
+        </div>
+      </div>
+    {% endif %}
+    </div>
+
+</body>
+</html>

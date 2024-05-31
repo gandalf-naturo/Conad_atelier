@@ -3,4 +3,6 @@ venv
 local_settings.py
 __pycache__
 static/
+hash_pass.py
+
 
